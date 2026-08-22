@@ -1,0 +1,36 @@
+% ============================================================
+% REFERÊNCIAS E NOTAS
+% ============================================================
+
+\usepackage{csquotes}
+
+% Bibliografia centralizada em .bib.
+% O estilo authoryear-icomp mantém as referências discretas.
+\usepackage[
+    backend=biber,
+    style=authoryear-icomp,
+    autocite=footnote,
+    giveninits=true,
+    maxbibnames=50,
+    maxcitenames=2,
+    language=portuguese
+]{biblatex}
+
+\addbibresource{bibliografia/fontes.bib}
+
+\SetBlockEnvironment{quotation}
+
+\renewenvironment{quotation}
+    {\list{}{
+        \setlength{\leftmargin}{1.5em}
+        \setlength{\rightmargin}{1.5em}
+    }
+    \item\relax
+    \small
+    \itshape}
+    {\endlist}
+
+% Notas de rodapé discretas
+\setlength{\footmarkwidth}{1.5em}
+\setlength{\footmarksep}{0.3em}
+\renewcommand{\foottextfont}{\footnotesize}

@@ -1,0 +1,72 @@
+% ============================================================
+% IDENTIDADE VISUAL
+% ============================================================
+
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% Mundo — azul petróleo / azul acinzentado
+\definecolor{CorMundo}{RGB}{67,91,101}
+
+% Brasil — verde
+\definecolor{CorBrasil}{RGB}{72,112,91}
+
+% Dona Maria — terracota
+\definecolor{CorMaria}{RGB}{154,96,78}
+
+% Neutros
+\definecolor{CorTexto}{RGB}{55,55,55}
+\definecolor{CorCinza}{RGB}{120,120,120}
+
+% Tema atual
+\newcommand{\corTema}{CorMaria}
+
+\newcommand{\temaMundo}{%
+    \renewcommand{\corTema}{CorMundo}%
+}
+
+\newcommand{\temaBrasil}{%
+    \renewcommand{\corTema}{CorBrasil}%
+}
+
+\newcommand{\temaMaria}{%
+    \renewcommand{\corTema}{CorMaria}%
+}
+
+% Moldura temática dos capítulos
+\newcommand{\molduraTematica}{%
+    \begingroup
+        \edef\x{\endgroup
+            \noexpand\AddToHookNext{shipout/background}{%
+                \noexpand\begin{tikzpicture}[remember picture,overlay]
+                    \noexpand\draw[
+                        color=\corTema,
+                        line width=0.45pt
+                    ]
+                    ([xshift=11mm,yshift=-11mm]current page.north west)
+                    rectangle
+                    ([xshift=-11mm,yshift=11mm]current page.south east);
+                \noexpand\end{tikzpicture}%
+            }%
+        }%
+    \x
+}
+
+% Moldura neutra das partes
+\newcommand{\molduraParte}{%
+    \begingroup
+        \edef\x{\endgroup
+            \noexpand\AddToHookNext{shipout/background}{%
+                \noexpand\begin{tikzpicture}[remember picture,overlay]
+                    \noexpand\draw[
+                        color=CorCinza,
+                        line width=0.35pt
+                    ]
+                    ([xshift=11mm,yshift=-11mm]current page.north west)
+                    rectangle
+                    ([xshift=-11mm,yshift=11mm]current page.south east);
+                \noexpand\end{tikzpicture}%
+            }%
+        }%
+    \x
+}

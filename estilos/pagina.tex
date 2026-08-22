@@ -1,0 +1,40 @@
+% ============================================================
+% GEOMETRIA, TEXTO E PAGINAÇÃO
+% ============================================================
+
+\setstocksize{210mm}{148mm}
+\settrimmedsize{210mm}{148mm}{*}
+
+\setlrmarginsandblock{24mm}{19mm}{*}
+\setulmarginsandblock{22mm}{22mm}{*}
+
+\setheadfoot{12mm}{10mm}
+\setheaderspaces{*}{8mm}{*}
+
+\checkandfixthelayout
+
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+
+\linespread{1.08}
+
+\makepagestyle{livro}
+
+\makeevenhead{livro}
+    {\small\thepage}
+    {}
+    {\small\itshape\leftmark}
+
+\makeoddhead{livro}
+    {\small\itshape\rightmark}
+    {}
+    {\small\thepage}
+
+\makeevenfoot{livro}{}{}{}
+\makeoddfoot{livro}{}{}{}
+
+\pagestyle{livro}
+
+\aliaspagestyle{chapter}{empty}
+\aliaspagestyle{part}{empty}
