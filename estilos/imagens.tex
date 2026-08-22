@@ -1,0 +1,50 @@
+% ============================================================
+% IMAGENS E LEGENDAS
+% ============================================================
+
+\usepackage{graphicx}
+\graphicspath{{imagens/}}
+
+\usepackage[
+    font=small,
+    labelfont=bf,
+    justification=centering
+]{caption}
+
+\captionsetup{skip=8pt}
+
+% Fotografia grande
+\newcommand{\fotoGrande}[3]{%
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.88\textwidth]{#1}
+        \caption{#2}
+        \label{#3}
+    \end{figure}
+}
+
+% Fotografia média
+\newcommand{\fotoMedia}[3]{%
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.68\textwidth]{#1}
+        \caption{#2}
+        \label{#3}
+    \end{figure}
+}
+
+% Fotografia pequena
+\newcommand{\fotoPequena}[3]{%
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.48\textwidth]{#1}
+        \caption{#2}
+        \label{#3}
+    \end{figure}
+}
+
+% Fonte de imagem
+\newcommand{\fonteImagem}[1]{%
+    \par\smallskip
+    {\footnotesize\itshape Fonte: #1.}%
+}

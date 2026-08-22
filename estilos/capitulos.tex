@@ -1,0 +1,63 @@
+% ============================================================
+% ESTILO DE CAPÍTULOS, PARTES E SUBTÍTULOS
+% ============================================================
+
+\makechapterstyle{dona-maria}{%
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\printchapternum}{}
+    \renewcommand{\afterchapternum}{}
+
+    \renewcommand{\chaptitlefont}{%
+        \normalfont
+        \fontsize{22}{26}\selectfont
+        \bfseries
+        \color{\corTema}
+    }
+
+    \renewcommand{\afterchaptertitle}{%
+        \molduraTematica
+        \par
+        \vskip 8pt
+        \noindent
+        {\color{\corTema}\rule{\textwidth}{0.8pt}}
+        \vskip 22pt
+    }
+}
+\chapterstyle{dona-maria}
+
+\renewcommand{\partnamefont}{%
+    \normalfont
+    \small
+    \scshape
+    \color{CorCinza}
+}
+
+\renewcommand{\partnumfont}{%
+    \normalfont
+    \fontsize{16}{20}\selectfont
+    \color{CorTexto}
+}
+
+\renewcommand{\parttitlefont}{%
+    \molduraParte
+    \normalfont
+    \fontsize{30}{34}\selectfont
+    \bfseries
+    \color{CorTexto}
+}
+
+\setsecnumdepth{subsection}
+
+\setsecheadstyle{%
+    \normalfont
+    \large
+    \bfseries
+    \color{\corTema}
+}
+
+\setsubsecheadstyle{%
+    \normalfont
+    \normalsize
+    \bfseries
+    \color{\corTema}
+}
