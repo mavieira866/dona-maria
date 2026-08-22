@@ -9,56 +9,71 @@
 
 \begin{document}
 
+% ============================================================
+% FRONTMATTER
+% ============================================================
+
+% A capa é tratada como elemento preliminar sem numeração.
+\input{frontmatter/capa}
+
 \frontmatter
 
-\chapter*{Dona Maria}
-\addcontentsline{toc}{chapter}{Dona Maria}
-
-Uma vida entre 1950 e 2025.
+\input{frontmatter/folha-rosto}
+\input{frontmatter/ficha-catalografica}
+\input{frontmatter/dedicatoria}
+\input{frontmatter/agradecimentos}
+% \input{frontmatter/epigrafe} % ativar quando houver texto definitivo
 
 \tableofcontents*
 
+% ============================================================
+% MAINMATTER — PARTES E CAPÍTULOS
+% ============================================================
+
 \mainmatter
 
-% ============================================================
+% ------------------------------------------------------------
 % PARTE I — 1950–1969
-% ============================================================
+% ------------------------------------------------------------
 \part{1950--1969}
 
 \input{capitulos/1950-1969/mundo}
 \input{capitulos/1950-1969/brasil}
 \input{capitulos/1950-1969/maria}
 
-% ============================================================
+% ------------------------------------------------------------
 % PARTE II — 1970–1989
-% ============================================================
+% ------------------------------------------------------------
 \part{1970--1989}
 
 \input{capitulos/1970-1989/mundo}
 \input{capitulos/1970-1989/brasil}
 \input{capitulos/1970-1989/maria}
 
-% ============================================================
+% ------------------------------------------------------------
 % PARTE III — 1990–2009
-% ============================================================
+% ------------------------------------------------------------
 \part{1990--2009}
 
 \input{capitulos/1990-2009/mundo}
 \input{capitulos/1990-2009/brasil}
 \input{capitulos/1990-2009/maria}
 
-% ============================================================
+% ------------------------------------------------------------
 % PARTE IV — 2010–2025
-% ============================================================
+% ------------------------------------------------------------
 \part{2010--2025}
 
 \input{capitulos/2010-2025/mundo}
 \input{capitulos/2010-2025/brasil}
 \input{capitulos/2010-2025/maria}
 
+% ============================================================
+% BACKMATTER — BIBLIOGRAFIA
+% ============================================================
+
 \backmatter
 
-% A bibliografia será gerada quando houver fontes citadas.
 \printbibliography[title={Fontes e referências}]
 
 \end{document}
