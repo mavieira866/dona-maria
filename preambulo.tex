@@ -1,0 +1,438 @@
+% ============================================================
+% LIVRO DONA MARIA
+% preambulo.tex
+% A5 / memoir / PDFLaTeX
+% ============================================================
+
+
+% ============================================================
+% 1. IDIOMA E CODIFICAÇÃO
+% ============================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+
+% ============================================================
+% 2. TIPOGRAFIA
+% ============================================================
+
+% Fonte serifada para texto de leitura longa
+\usepackage{libertinus}
+
+% Melhora a composição tipográfica
+\usepackage[
+    protrusion=true,
+    expansion=true
+]{microtype}
+
+
+% ============================================================
+% 3. CORES E TEMAS DA IDENTIDADE VISUAL
+% ============================================================
+
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% Mundo — azul petróleo / azul acinzentado
+\definecolor{CorMundo}{RGB}{67,91,101}
+
+% Brasil — verde oliva
+\definecolor{CorBrasil}{RGB}{91,108,76}
+
+% Dona Maria — terracota / vinho queimado
+\definecolor{CorMaria}{RGB}{142,91,76}
+
+% Neutros
+\definecolor{CorTexto}{RGB}{55,55,55}
+\definecolor{CorCinza}{RGB}{120,120,120}
+
+% Cor temática atual
+\newcommand{\corTema}{CorMaria}
+
+\newcommand{\temaMundo}{%
+    \renewcommand{\corTema}{CorMundo}%
+}
+
+\newcommand{\temaBrasil}{%
+    \renewcommand{\corTema}{CorBrasil}%
+}
+
+\newcommand{\temaMaria}{%
+    \renewcommand{\corTema}{CorMaria}%
+}
+
+% ------------------------------------------------------------
+% Moldura temática das páginas de abertura dos capítulos
+% ------------------------------------------------------------
+%
+% A moldura é aplicada somente à próxima página enviada ao PDF.
+% A cor é expandida no momento da chamada do comando, evitando
+% que um capítulo posterior altere a cor da moldura anterior.
+%
+\newcommand{\molduraTematica}{%
+    \begingroup
+        \edef\x{\endgroup
+            \noexpand\AddToHookNext{shipout/background}{%
+                \noexpand\begin{tikzpicture}[remember picture,overlay]
+                    \noexpand\draw[
+                        color=\corTema,
+                        line width=0.45pt
+                    ]
+                    ([xshift=11mm,yshift=-11mm]current page.north west)
+                    rectangle
+                    ([xshift=-11mm,yshift=11mm]current page.south east);
+                \noexpand\end{tikzpicture}%
+            }%
+        }%
+    \x
+}
+
+% ------------------------------------------------------------
+% Moldura neutra das páginas de abertura das grandes partes
+% ------------------------------------------------------------
+%
+% As quatro partes representam grandes períodos da narrativa.
+% Por isso utilizam uma moldura neutra, distinta das molduras
+% temáticas dos capítulos.
+%
+\newcommand{\molduraParte}{%
+    \begingroup
+        \edef\x{\endgroup
+            \noexpand\AddToHookNext{shipout/background}{%
+                \noexpand\begin{tikzpicture}[remember picture,overlay]
+                    \noexpand\draw[
+                        color=CorCinza,
+                        line width=0.35pt
+                    ]
+                    ([xshift=11mm,yshift=-11mm]current page.north west)
+                    rectangle
+                    ([xshift=-11mm,yshift=11mm]current page.south east);
+                \noexpand\end{tikzpicture}%
+            }%
+        }%
+    \x
+}
+
+
+% ============================================================
+% 4. GEOMETRIA DA PÁGINA
+% ============================================================
+
+% Formato final A5
+\setstocksize{210mm}{148mm}
+\settrimmedsize{210mm}{148mm}{*}
+
+% Margens:
+% esquerda/direita = margem interna/externa
+\setlrmarginsandblock{24mm}{19mm}{*}
+
+% margem superior/inferior
+\setulmarginsandblock{22mm}{22mm}{*}
+
+% Cabeçalho e rodapé
+\setheadfoot{12mm}{10mm}
+
+% Distância entre corpo e cabeçalho
+\setheaderspaces{*}{8mm}{*}
+
+% Calcula o layout final
+\checkandfixthelayout
+
+
+% ============================================================
+% 5. TEXTO
+% ============================================================
+
+% Recuo da primeira linha
+\setlength{\parindent}{1.2em}
+
+% Sem espaço extra entre parágrafos
+\setlength{\parskip}{0pt}
+
+% Pequena tolerância para evitar linhas problemáticas
+\setlength{\emergencystretch}{2em}
+
+% Entrelinhamento
+\linespread{1.08}
+
+
+% ============================================================
+% 6. PAGINAÇÃO
+% ============================================================
+
+% ------------------------------------------------------------
+% Estilo principal das páginas
+% ------------------------------------------------------------
+
+\makepagestyle{livro}
+
+% Página par:
+% número à esquerda / título do capítulo à direita
+\makeevenhead{livro}
+    {\small\thepage}
+    {}
+    {\small\itshape\leftmark}
+
+% Página ímpar:
+% título da seção à esquerda / número à direita
+\makeoddhead{livro}
+    {\small\itshape\rightmark}
+    {}
+    {\small\thepage}
+
+% Sem elementos no rodapé
+\makeevenfoot{livro}{}{}{}
+\makeoddfoot{livro}{}{}{}
+
+% Ativa o estilo
+\pagestyle{livro}
+
+
+% ------------------------------------------------------------
+% Páginas de abertura de capítulos
+% ------------------------------------------------------------
+
+% Capítulos começam sem cabeçalho
+\aliaspagestyle{chapter}{empty}
+
+% Partes começam sem cabeçalho
+\aliaspagestyle{part}{empty}
+
+
+% ============================================================
+% 7. ESTILO DOS CAPÍTULOS
+% ============================================================
+
+\makechapterstyle{dona-maria}{%
+
+    % O livro usa títulos narrativos, sem a palavra "Capítulo".
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\printchapternum}{}
+    \renewcommand{\afterchapternum}{}
+
+    % Título do capítulo
+    \renewcommand{\chaptitlefont}{%
+        \normalfont
+        \fontsize{22}{26}\selectfont
+        \bfseries
+        \color{\corTema}
+    }
+
+    % Linha temática abaixo do título
+    \renewcommand{\afterchaptertitle}{%
+        \molduraTematica
+        \par
+        \vskip 8pt
+        \noindent
+        {\color{\corTema}\rule{\textwidth}{0.8pt}}
+        \vskip 22pt
+    }
+}
+
+\chapterstyle{dona-maria}
+
+
+% ============================================================
+% 8. ESTILO DAS PARTES / GRANDES PERÍODOS
+% ============================================================
+
+\renewcommand{\partnamefont}{%
+    \normalfont
+    \small
+    \scshape
+    \color{CorCinza}
+}
+
+\renewcommand{\partnumfont}{%
+    \normalfont
+    \fontsize{16}{20}\selectfont
+    \color{CorTexto}
+}
+
+\renewcommand{\parttitlefont}{%
+    \molduraParte
+    \normalfont
+    \fontsize{30}{34}\selectfont
+    \bfseries
+    \color{CorTexto}
+}
+
+
+% ============================================================
+% 9. SEÇÕES
+% ============================================================
+
+\setsecnumdepth{subsection}
+
+\setsecheadstyle{
+    \normalfont
+    \large
+    \bfseries
+    \color{CorTexto}
+}
+
+\setsubsecheadstyle{
+    \normalfont
+    \normalsize
+    \bfseries
+    \color{CorTexto}
+}
+
+
+% ============================================================
+% 10. SUMÁRIO
+% ============================================================
+
+\renewcommand{\contentsname}{Sumário}
+
+\settocdepth{chapter}
+
+\renewcommand{\cftpartfont}{
+    \normalfont
+    \bfseries
+}
+
+\renewcommand{\cftpartpagefont}{
+    \normalfont
+    \bfseries
+}
+
+\renewcommand{\cftchapterfont}{
+    \normalfont
+}
+
+\renewcommand{\cftchapterpagefont}{
+    \normalfont
+}
+
+
+% ============================================================
+% 11. CITAÇÕES
+% ============================================================
+
+\usepackage{csquotes}
+
+\SetBlockEnvironment{quotation}
+
+\renewenvironment{quotation}
+    {\list{}{
+        \setlength{\leftmargin}{1.5em}
+        \setlength{\rightmargin}{1.5em}
+    }
+    \item\relax
+    \small
+    \itshape}
+    {\endlist}
+
+
+% ============================================================
+% 12. IMAGENS
+% ============================================================
+
+\usepackage{graphicx}
+
+\graphicspath{
+    {imagens/}
+}
+
+\usepackage[
+    font=small,
+    labelfont=bf,
+    justification=centering
+]{caption}
+
+\captionsetup{
+    skip=8pt
+}
+
+
+% ============================================================
+% 13. TABELAS
+% ============================================================
+
+\usepackage{booktabs}
+\usepackage{array}
+
+
+% ============================================================
+% 14. LINKS E PDF
+% ============================================================
+
+\usepackage[
+    hidelinks,
+    pdfusetitle
+]{hyperref}
+
+\usepackage{bookmark}
+
+
+% ============================================================
+% 15. METADADOS DO LIVRO
+% ============================================================
+
+\hypersetup{
+    pdftitle={
+        Dona Maria
+    },
+    pdfauthor={
+        Autor
+    },
+    pdfsubject={
+        A história de Dona Maria, 1950--2025
+    },
+    pdfkeywords={
+        Dona Maria,
+        memória,
+        família,
+        Brasil,
+        história
+    }
+}
+
+
+% ============================================================
+% 16. NOTAS DE RODAPÉ
+% ============================================================
+
+\setlength{\footmarkwidth}{1.5em}
+\setlength{\footmarksep}{0.3em}
+
+\renewcommand{\foottextfont}{
+    \footnotesize
+}
+
+
+% ============================================================
+% 17. COMANDOS EDITORIAIS
+% ============================================================
+
+% Destaque para anos
+\newcommand{\ano}[1]{%
+    \textsc{#1}%
+}
+
+% Linha editorial
+\newcommand{\linhaeditorial}{%
+    \par
+    \vspace{1em}
+    \noindent
+    {\color{\corTema}\rule{\textwidth}{0.5pt}}
+    \par
+    \vspace{1em}
+}
+
+% Separador de memória
+\newcommand{\memoria}{%
+    \begin{center}
+        {\color{\corTema}
+        \small
+        $\ast\quad\ast\quad\ast$}
+    \end{center}
+}
+
+
+% ============================================================
+% FIM DO PREÂMBULO
+% ============================================================
